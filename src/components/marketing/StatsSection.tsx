@@ -1,0 +1,68 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Award, Users, Calendar, ShieldCheck } from "lucide-react";
+import { company } from "@/data/company";
+
+const stats = [
+  {
+    icon: <Calendar className="h-8 w-8" />,
+    value: `${company.stats.yearsInBusiness}+`,
+    label: "Years in Business",
+  },
+  {
+    icon: <Users className="h-8 w-8" />,
+    value: company.stats.projectsCompleted.toLocaleString() + "+",
+    label: "Projects Completed",
+  },
+  {
+    icon: <Award className="h-8 w-8" />,
+    value: `${company.stats.satisfactionRate}%`,
+    label: "Customer Satisfaction",
+  },
+  {
+    icon: <ShieldCheck className="h-8 w-8" />,
+    value: `${company.stats.warrantyYears}+`,
+    label: "Years Warranty",
+  },
+];
+
+export function StatsSection() {
+  return (
+    <section className="py-16 bg-gradient-primary relative overflow-hidden">
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8 relative">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 text-white mb-4">
+                {stat.icon}
+              </div>
+              <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
+                {stat.value}
+              </div>
+              <div className="text-white/80">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
