@@ -1,131 +1,88 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Users, Calendar, ShieldCheck, Target, Heart } from "lucide-react";
+import Link from "next/link";
 import { company } from "@/data/company";
-import { CTASection } from "@/components/marketing";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, Award, Users, Clock, Shield, CheckCircle } from "lucide-react";
 
 const values = [
   {
-    icon: <Target className="h-6 w-6" />,
-    title: "Quality First",
-    description:
-      "We never compromise on quality. Every project uses premium materials and expert craftsmanship.",
-  },
-  {
-    icon: <Heart className="h-6 w-6" />,
-    title: "Customer Focus",
-    description:
-      "Your satisfaction is our priority. We listen, communicate, and deliver beyond expectations.",
-  },
-  {
-    icon: <ShieldCheck className="h-6 w-6" />,
-    title: "Integrity",
-    description:
-      "Honest pricing, transparent communication, and standing behind our work with comprehensive warranties.",
+    icon: <Shield className="h-6 w-6" />,
+    title: "Quality Craftsmanship",
+    description: "We never cut corners. Every project is completed to the highest standards.",
   },
   {
     icon: <Users className="h-6 w-6" />,
-    title: "Community",
-    description:
-      "We're proud to serve our local community and treat every home like it's our own.",
+    title: "Customer First",
+    description: "Your satisfaction is our top priority. We listen, communicate, and deliver.",
+  },
+  {
+    icon: <Clock className="h-6 w-6" />,
+    title: "Timely Delivery",
+    description: "We respect your time and always aim to complete projects on schedule.",
+  },
+  {
+    icon: <Award className="h-6 w-6" />,
+    title: "Certified Experts",
+    description: "Our team is fully licensed, insured, and certified in all services we offer.",
   },
 ];
 
-const team = [
-  {
-    name: "John Mitchell",
-    role: "Founder & CEO",
-    bio: "25+ years of experience in home improvement",
-  },
-  {
-    name: "Sarah Thompson",
-    role: "Operations Manager",
-    bio: "Ensures every project runs smoothly",
-  },
-  {
-    name: "Mike Rodriguez",
-    role: "Lead Estimator",
-    bio: "Expert in accurate, fair pricing",
-  },
-  {
-    name: "Emily Chen",
-    role: "Customer Relations",
-    bio: "Dedicated to your satisfaction",
-  },
+const milestones = [
+  { year: "2010", event: "Company Founded" },
+  { year: "2013", event: "Expanded to Windows & Siding" },
+  { year: "2016", event: "1,000th Project Completed" },
+  { year: "2019", event: "Opened Second Location" },
+  { year: "2022", event: "5,000+ Happy Customers" },
+  { year: "2024", event: "Launched AI Customer Service" },
 ];
 
 export default function AboutPage() {
   return (
-    <>
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-dark relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `linear-gradient(rgba(255,107,53,0.1) 1px, transparent 1px),
-                               linear-gradient(90deg, rgba(255,107,53,0.1) 1px, transparent 1px)`,
-              backgroundSize: "50px 50px",
-            }}
-          />
-        </div>
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <section className="relative py-24 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-background" />
+        <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto"
+            transition={{ duration: 0.6 }}
+            className="text-center"
           >
-            <span className="text-primary font-medium mb-4 block">
-              ABOUT US
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              Building Trust, One Home at a Time
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              About <span className="text-primary">{company.name}</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
-              For over {company.stats.yearsInBusiness} years, we&apos;ve been
-              the trusted choice for homeowners across Massachusetts and
-              Connecticut.
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              {company.tagline}
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Story Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Our <span className="text-gradient">Story</span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Our <span className="text-primary">Story</span>
               </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  {company.name} was founded with a simple mission: to provide
-                  homeowners with honest, quality home improvement services at
-                  fair prices.
+                  Founded in 2010, {company.name} started with a simple mission: to provide homeowners with quality home improvement services they could trust.
                 </p>
                 <p>
-                  What started as a small roofing company has grown into a
-                  full-service home improvement business, serving thousands of
-                  families throughout Western Massachusetts and Northern
-                  Connecticut.
+                  What began as a small roofing company has grown into a full-service home improvement contractor, serving thousands of satisfied customers across the region.
                 </p>
                 <p>
-                  Our success is built on a foundation of integrity, quality
-                  workmanship, and genuine care for our customers. We treat
-                  every home as if it were our own, and every customer like
-                  family.
-                </p>
-                <p>
-                  Today, we&apos;re proud to be one of the region&apos;s most
-                  trusted home improvement companies, with a team of skilled
-                  professionals dedicated to exceeding your expectations.
+                  Today, we&apos;re proud to offer comprehensive roofing, window, siding, and gutter services, all backed by our commitment to excellence and customer satisfaction.
                 </p>
               </div>
             </motion.div>
@@ -133,46 +90,18 @@ export default function AboutPage() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="grid grid-cols-2 gap-6"
+              className="grid grid-cols-2 gap-4"
             >
-              {[
-                {
-                  icon: <Calendar className="h-8 w-8" />,
-                  value: `${company.stats.yearsInBusiness}+`,
-                  label: "Years Experience",
-                },
-                {
-                  icon: <Users className="h-8 w-8" />,
-                  value: `${company.stats.projectsCompleted.toLocaleString()}+`,
-                  label: "Projects Done",
-                },
-                {
-                  icon: <Award className="h-8 w-8" />,
-                  value: `${company.stats.satisfactionRate}%`,
-                  label: "Satisfaction",
-                },
-                {
-                  icon: <ShieldCheck className="h-8 w-8" />,
-                  value: `${company.stats.warrantyYears}+`,
-                  label: "Year Warranty",
-                },
-              ].map((stat, index) => (
-                <div
-                  key={index}
-                  className="p-6 rounded-2xl bg-card border border-border text-center"
-                >
-                  <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4">
-                    {stat.icon}
-                  </div>
-                  <div className="text-3xl font-bold text-foreground mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </div>
+              {company.stats.map((stat, index) => (
+                <Card key={index} className="bg-card/50 border-border/50">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                      {stat.value}
+                    </div>
+                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  </CardContent>
+                </Card>
               ))}
             </motion.div>
           </div>
@@ -180,24 +109,19 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-24 bg-card">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="py-16 px-4 bg-card/30">
+        <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <span className="text-primary font-medium mb-4 block">
-              OUR VALUES
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              What Drives Us
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Our <span className="text-primary">Values</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our core values guide everything we do, from the first call to the
-              final inspection.
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              The principles that guide everything we do
             </p>
           </motion.div>
 
@@ -207,99 +131,134 @@ export default function AboutPage() {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="p-6 rounded-2xl bg-background border border-border hover:border-primary/50 transition-colors"
+                transition={{ delay: index * 0.1 }}
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
-                  {value.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  {value.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {value.description}
-                </p>
+                <Card className="h-full bg-card/50 border-border/50 hover:border-primary/50 transition-colors">
+                  <CardContent className="p-6 text-center">
+                    <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4">
+                      {value.icon}
+                    </div>
+                    <h3 className="font-semibold mb-2">{value.title}</h3>
+                    <p className="text-sm text-muted-foreground">{value.description}</p>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 lg:px-8">
+      {/* Timeline Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <span className="text-primary font-medium mb-4 block">
-              OUR TEAM
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Meet the Experts
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Our <span className="text-primary">Journey</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our experienced team is dedicated to delivering exceptional
-              results on every project.
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Key milestones in our company history
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="p-6 rounded-2xl bg-card border border-border text-center"
-              >
-                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-10 w-10 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-primary text-sm mb-2">{member.role}</p>
-                <p className="text-sm text-muted-foreground">{member.bio}</p>
-              </motion.div>
-            ))}
+          <div className="relative">
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-border" />
+            <div className="space-y-8">
+              {milestones.map((milestone, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`flex items-center gap-4 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                >
+                  <div className={`flex-1 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                    <div className="inline-block bg-card border border-border/50 rounded-lg p-4">
+                      <div className="text-primary font-bold">{milestone.year}</div>
+                      <div className="text-sm text-muted-foreground">{milestone.event}</div>
+                    </div>
+                  </div>
+                  <div className="relative z-10 h-4 w-4 rounded-full bg-primary" />
+                  <div className="flex-1" />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Certifications */}
-      <section className="py-16 bg-card">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="py-16 px-4 bg-card/30">
+        <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-center"
+            className="text-center mb-12"
           >
-            <h3 className="text-lg font-semibold text-foreground mb-8">
-              Certifications & Awards
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              {company.certifications.map((cert, index) => (
-                <span
-                  key={index}
-                  className="px-6 py-3 rounded-full bg-primary/10 text-primary font-medium"
-                >
-                  {cert}
-                </span>
-              ))}
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Certifications & <span className="text-primary">Licenses</span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Fully licensed, bonded, and insured for your peace of mind
+            </p>
+          </motion.div>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            {company.certifications.map((cert, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center gap-2 bg-card border border-border/50 rounded-full px-4 py-2"
+              >
+                <CheckCircle className="h-4 w-4 text-primary" />
+                <span className="text-sm">{cert}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl p-8 md:p-12 text-center border border-primary/20"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to Work With Us?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
+              Join thousands of satisfied homeowners who trust us with their home improvement projects
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/calculator">
+                <Button size="lg" className="w-full sm:w-auto">
+                  Get Free Quote
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                  Contact Us
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>
       </section>
-
-      <CTASection />
-    </>
+    </div>
   );
 }

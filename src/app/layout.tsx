@@ -1,43 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Navbar, Footer } from "@/components/marketing";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { Navbar } from "@/components/marketing/Navbar";
+import { Footer } from "@/components/marketing/Footer";
 import { VoiceWidget } from "@/components/voice/VoiceWidget";
 import { Toaster } from "@/components/ui/sonner";
-import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "Major Home Improvements | Roofing, Windows, Siding & Gutters",
-  description:
-    "Transform your home with expert craftsmanship. Premium roofing, windows, siding, and gutter services in Massachusetts and Connecticut. Get a free instant quote today!",
-  keywords: [
-    "home improvement",
-    "roofing",
-    "windows",
-    "siding",
-    "gutters",
-    "Massachusetts",
-    "Connecticut",
-    "roof replacement",
-    "window installation",
-  ],
-  authors: [{ name: "Major Home Improvements" }],
-  openGraph: {
-    title: "Major Home Improvements | Expert Home Improvement Services",
-    description:
-      "Premium roofing, windows, siding, and gutter services. Get a free instant quote!",
-    type: "website",
-    locale: "en_US",
-  },
+  description: "Transform your home with our expert roofing, window replacement, siding, and gutter services. Quality craftsmanship, competitive pricing, and exceptional service.",
+  keywords: ["roofing", "windows", "siding", "gutters", "home improvement", "contractors"],
 };
 
 export default function RootLayout({
@@ -46,15 +23,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
-      >
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground`}>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="min-h-screen">
+          {children}
+        </main>
         <Footer />
         <VoiceWidget />
-        <Toaster />
+        <Toaster position="top-right" />
       </body>
     </html>
   );
