@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { calculateQuote, type CalculatorInput } from "@/lib/calculator/pricing";
+import { calculateQuote, type CalculatorInput, type MaterialTier, type ServiceType, type PropertyType } from "@/lib/calculator/pricing";
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,6 +12,8 @@ export async function POST(request: NextRequest) {
       squareFootage,
       stories,
       propertyType,
+      currentCondition,
+      needsRemoval,
       addons,
     } = body;
 
@@ -25,11 +27,13 @@ export async function POST(request: NextRequest) {
 
     // Calculate quote
     const calculatorInput: CalculatorInput = {
-      service,
-      tier,
+      service: service as ServiceType,
+      materialTier: tier as MaterialTier,
       squareFootage: Number(squareFootage),
       stories: Number(stories) || 1,
-      propertyType: propertyType || "residential",
+      propertyType: (propertyType || "residential") as PropertyType,
+      currentCondition: currentCondition || "good",
+      needsRemoval: needsRemoval || false,
       addons: addons || [],
     };
 
@@ -47,8 +51,8 @@ export async function POST(request: NextRequest) {
         square_footage: squareFootage,
         stories,
         addons,
-        price_low: quote.priceLow,
-        price_high: quote.priceHigh,
+        price_low: quote.breakdown.lowEstimate,
+        price_high: quote.breakdown.highEstimate,
         breakdown: quote.breakdown,
       })
       .select()
@@ -86,8 +90,8 @@ export async function POST(request: NextRequest) {
               lead_id,
               service,
               tier,
-              price_low: quote.priceLow,
-              price_high: quote.priceHigh,
+              price_low: quote.breakdown.lowEstimate,
+              price_high: quote.breakdown.highEstimate,
             },
           }),
         });

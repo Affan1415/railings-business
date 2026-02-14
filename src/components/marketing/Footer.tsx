@@ -16,7 +16,7 @@ export function Footer() {
               </div>
               <span className="text-xl font-bold text-foreground">{company.name}</span>
             </div>
-            <p className="text-muted-foreground mb-6">{company.tagline}. Serving Western Massachusetts and Northern Connecticut for over {company.stats.yearsInBusiness} years.</p>
+            <p className="text-muted-foreground mb-6">{company.tagline}. Serving Western Massachusetts and Northern Connecticut for over 15 years.</p>
             <div className="flex space-x-4">
               <a href={company.social.facebook} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><Facebook className="h-5 w-5" /></a>
               <a href={company.social.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><Instagram className="h-5 w-5" /></a>
@@ -47,7 +47,7 @@ export function Footer() {
               <li className="flex items-start space-x-3"><Phone className="h-5 w-5 text-primary mt-0.5" /><div><a href={`tel:${company.phone}`} className="text-foreground hover:text-primary transition-colors font-medium">{company.phone}</a><p className="text-sm text-muted-foreground">Call for free estimate</p></div></li>
               <li className="flex items-start space-x-3"><Mail className="h-5 w-5 text-primary mt-0.5" /><a href={`mailto:${company.email}`} className="text-muted-foreground hover:text-primary transition-colors">{company.email}</a></li>
               <li className="flex items-start space-x-3"><MapPin className="h-5 w-5 text-primary mt-0.5" /><span className="text-muted-foreground">{company.address.street}<br />{company.address.city}, {company.address.state} {company.address.zip}</span></li>
-              <li className="flex items-start space-x-3"><Clock className="h-5 w-5 text-primary mt-0.5" /><div className="text-muted-foreground"><p>Mon-Fri: {company.hours.weekdays}</p><p>Sat: {company.hours.saturday}</p></div></li>
+              <li className="flex items-start space-x-3"><Clock className="h-5 w-5 text-primary mt-0.5" /><div className="text-muted-foreground">{company.hours.map((h, i) => <p key={i}>{h.days}: {h.hours}</p>)}</div></li>
             </ul>
           </div>
         </div>

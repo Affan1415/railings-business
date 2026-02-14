@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 import { Award, Users, Calendar, ShieldCheck } from "lucide-react";
 import { company } from "@/data/company";
 
-const stats = [
-  { icon: <Calendar className="h-8 w-8" />, value: `${company.stats.yearsInBusiness}+`, label: "Years in Business" },
-  { icon: <Users className="h-8 w-8" />, value: company.stats.projectsCompleted.toLocaleString() + "+", label: "Projects Completed" },
-  { icon: <Award className="h-8 w-8" />, value: `${company.stats.satisfactionRate}%`, label: "Customer Satisfaction" },
-  { icon: <ShieldCheck className="h-8 w-8" />, value: `${company.stats.warrantyYears}+`, label: "Years Warranty" },
-];
-
 export function StatsSection() {
+  const stats = [
+    { icon: <Calendar className="h-8 w-8" />, value: company.stats[0].value, label: company.stats[0].label },
+    { icon: <Users className="h-8 w-8" />, value: company.stats[1].value, label: company.stats[1].label },
+    { icon: <Award className="h-8 w-8" />, value: company.stats[2].value, label: company.stats[2].label },
+    { icon: <ShieldCheck className="h-8 w-8" />, value: company.stats[3].value, label: company.stats[3].label },
+  ];
+
   return (
     <section className="py-16 bg-gradient-to-r from-orange-500 to-red-600 relative overflow-hidden">
       <div className="absolute inset-0 opacity-10"><div className="absolute inset-0" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`, backgroundSize: "40px 40px" }} /></div>
